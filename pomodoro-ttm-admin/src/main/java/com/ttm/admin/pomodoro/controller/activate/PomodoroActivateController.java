@@ -17,7 +17,7 @@ import com.ttm.admin.common.model.vo.pomodoro.PomodoroResponse;
 import com.ttm.admin.pomodoro.service.activate.PomodoroActivateService;
 
 @RestController
-@RequestMapping(value = "/pomodoro/api")
+@RequestMapping(value = "/api/pomodoro")
 public class PomodoroActivateController {
 	
 	@Autowired

@@ -6,9 +6,9 @@ import java.util.List;
 
 import com.ttm.admin.common.config.CommonDateFormatter;
 import com.ttm.admin.common.constants.PomodoroConstants;
-import com.ttm.admin.common.enums.pomodoro.ON;
-import com.ttm.admin.common.enums.pomodoro.STAGE;
-import com.ttm.admin.common.enums.pomodoro.STATUS;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_ON;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_STAGE;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_STATUS;
 import com.ttm.admin.common.model.entity.pomodoro.Pomodoro;
 import com.ttm.admin.common.model.entity.pomodoro.PomodoroCycle;
 import com.ttm.admin.common.model.vo.pomodoro.PomodoroCycleResponse;
@@ -22,8 +22,8 @@ public class PomodoroActivateConverter {
 
 		pomodoro.setTaskId(request.getTaskId());
 
-		pomodoro.setStatus(STATUS.ACTIVE.toString());
-		pomodoro.setStage(STAGE.IN_PROGRESS.toString());
+		pomodoro.setStatus(POMODORO_STATUS.ACTIVE.toString());
+		pomodoro.setStage(POMODORO_STAGE.IN_PROGRESS.toString());
 
 		Date date = new Date();
 		pomodoro.setDate(CommonDateFormatter.dateFormatterToString(date));
@@ -32,11 +32,11 @@ public class PomodoroActivateConverter {
 
 		PomodoroCycle pomodoroCycle = new PomodoroCycle();
 		pomodoroCycle.setOn(request.getPomodoroCycle().getOn());
-		if (pomodoroCycle.getOn() == ON.BREAK)
+		if (pomodoroCycle.getOn() == POMODORO_ON.BREAK)
 			pomodoroCycle.setDuration(PomodoroConstants.DEFAULT_BREAK_DURATION);
 		else
 			pomodoroCycle.setDuration(PomodoroConstants.DEFAULT_WORK_DURATION);
-		pomodoroCycle.setStatus(STATUS.STARTED);
+		pomodoroCycle.setStatus(POMODORO_STATUS.STARTED);
 		pomodoroCycle.setStartTime(CommonDateFormatter.dateTimeFormatterToString(date));
 		
 		pomodoro.addPomodoroCycle(pomodoroCycle);

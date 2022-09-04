@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.ttm.admin.common.config.CommonDateFormatter;
 import com.ttm.admin.common.constants.CommonConstants;
-import com.ttm.admin.common.enums.pomodoro.ON;
-import com.ttm.admin.common.enums.pomodoro.STAGE;
-import com.ttm.admin.common.enums.pomodoro.STATUS;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_ON;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_STAGE;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_STATUS;
 import com.ttm.admin.common.model.entity.pomodoro.Pomodoro;
 import com.ttm.admin.common.model.entity.pomodoro.PomodoroCycle;
 import com.ttm.admin.pomodoro.repository.activate.PomodoroActivateRepository;
@@ -33,7 +33,7 @@ public class PomodoroActivateServiceImpl implements PomodoroActivateService {
 		// TODO: get user profile data to get customized work time and break time
 		// TODO: Find the current active POMODORO with UserId, TaskId, Date, Status
 		Pomodoro pomodoroEntity = pomodoroActivateRepo.findByUserIdAndTaskIdAndDateAndStatus("1", "1",
-				CommonDateFormatter.dateFormatterToString(new Date()), STATUS.ACTIVE.toString());
+				CommonDateFormatter.dateFormatterToString(new Date()), POMODORO_STATUS.ACTIVE.toString());
 		// NOTE: if previous day task is not completed yet then run scheduler which is
 		// responsible to CLOSE pomodoro cycle by system
 
@@ -50,15 +50,15 @@ public class PomodoroActivateServiceImpl implements PomodoroActivateService {
 	public Pomodoro completePomodoroStep(String id) {
 		Pomodoro pomodoro = getPomodoroById(id);
 		
-		pomodoro.setStage(STAGE.COMPLETE.toString());
-		pomodoro.setStatus(STATUS.COMPLETE.toString());
+		pomodoro.setStage(POMODORO_STAGE.COMPLETE.toString());
+		pomodoro.setStatus(POMODORO_STATUS.COMPLETE.toString());
 		
 		Date date = new Date();
 		pomodoro.setEndTime(CommonDateFormatter.dateTimeFormatterToString(date));
 		pomodoro.setUpdatedAt(CommonDateFormatter.dateTimeZoneFormatterToString(date));
 		
 		PomodoroCycle pomodoroCycle = prevousPomodoroStep(pomodoro.getPomodoroCycle());
-		pomodoroCycle.setStatus(STATUS.COMPLETE);
+		pomodoroCycle.setStatus(POMODORO_STATUS.COMPLETE);
 		pomodoroCycle.setEndTime(CommonDateFormatter.dateTimeFormatterToString(date));
 		
 		return saveOrUpdatePomodoro(pomodoro);
@@ -71,9 +71,9 @@ public class PomodoroActivateServiceImpl implements PomodoroActivateService {
 			throw new RuntimeException("You are already on: " + pomodoroCycle.getOn());
 
 		previousPomodoroCycle.setEndTime(CommonDateFormatter.dateTimeFormatterToString(new Date()));
-		previousPomodoroCycle.setStatus(STATUS.COMPLETE);
+		previousPomodoroCycle.setStatus(POMODORO_STATUS.COMPLETE);
 
-		if (previousPomodoroCycle.getOn() == ON.WORK)
+		if (previousPomodoroCycle.getOn() == POMODORO_ON.WORK)
 			pomodoroCycle.setCycle(previousPomodoroCycle.getCycle());
 		else
 			pomodoroCycle.setCycle(previousPomodoroCycle.getCycle() + 1);
