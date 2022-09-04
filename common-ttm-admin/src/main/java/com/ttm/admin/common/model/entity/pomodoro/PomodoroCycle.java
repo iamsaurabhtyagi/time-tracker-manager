@@ -1,7 +1,7 @@
 package com.ttm.admin.common.model.entity.pomodoro;
 
-import com.ttm.admin.common.enums.pomodoro.ON;
-import com.ttm.admin.common.enums.pomodoro.STATUS;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_ON;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_STATUS;
 
 public class PomodoroCycle {
 
@@ -15,7 +15,7 @@ public class PomodoroCycle {
 	/**
 	 * User can be on WORK or BREAK
 	 */
-	private ON on;
+	private POMODORO_ON on;
 
 	/**
 	 * Cycle Start Time
@@ -37,7 +37,7 @@ public class PomodoroCycle {
 	 */
 	private int step;
 
-	private STATUS status;
+	private POMODORO_STATUS status;
 
 	public int getDuration() {
 		return duration;
@@ -47,11 +47,11 @@ public class PomodoroCycle {
 		this.duration = duration;
 	}
 
-	public ON getOn() {
+	public POMODORO_ON getOn() {
 		return on;
 	}
 
-	public void setOn(ON on) {
+	public void setOn(POMODORO_ON on) {
 		this.on = on;
 	}
 
@@ -87,11 +87,11 @@ public class PomodoroCycle {
 		this.step = step;
 	}
 
-	public STATUS getStatus() {
+	public POMODORO_STATUS getStatus() {
 		return status;
 	}
 
-	public void setStatus(STATUS status) {
+	public void setStatus(POMODORO_STATUS status) {
 		this.status = status;
 	}
 

@@ -1,10 +1,10 @@
 package com.ttm.admin.common.model.vo.pomodoro;
 
-import com.ttm.admin.common.enums.pomodoro.ON;
+import com.ttm.admin.common.enums.pomodoro.POMODORO_ON;
 
 public class PomodoroCycleResponse {
 
-	private ON on;
+	private POMODORO_ON on;
 	private int cycle;
 	private int step;
 	private int duration;
@@ -12,11 +12,11 @@ public class PomodoroCycleResponse {
 	private String startTime;
 	private String endTime;
 
-	public ON getOn() {
+	public POMODORO_ON getOn() {
 		return on;
 	}
 
-	public void setOn(ON on) {
+	public void setOn(POMODORO_ON on) {
 		this.on = on;
 	}
 
